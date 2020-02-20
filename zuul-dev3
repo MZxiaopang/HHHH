@@ -1,0 +1,40 @@
+# 设置注册中心的URL
+eureka.client.serviceUrl.defaultZone=http://localhost:9991/eureka
+# 同时将自己注册到注册中心(eureka)
+eureka.client.register-with-eureka=true
+# 主动从注册中心上获得注册信息
+eureka.client.fetch-registry=true
+
+#zuul  路由规则配置  //拦截所有符合/aa/**的请求
+zuul.routes.api-a.path=/add/**
+# serviceId  配合上面使用  上面拦截的请求都会转发到这个服务上面
+zuul.routes.api-a.serviceId=VService
+
+
+#zuul  路由规则配置  //拦截所有符合/ddd/**的请求
+zuul.routes.api-b.path=/delete/**
+# serviceId  配合上面使用  上面拦截的请求都会转发到这个服务上面
+zuul.routes.api-b.serviceId=VService
+
+#zuul  路由规则配置  //拦截所有符合/ddd/**的请求
+zuul.routes.api-c.path=/update/**
+# serviceId  配合上面使用  上面拦截的请求都会转发到这个服务上面
+zuul.routes.api-c.serviceId=VService
+
+#zuul  路由规则配置  //拦截所有符合/ddd/**的请求
+zuul.routes.api-d.path=/findAll/**
+# serviceId  配合上面使用  上面拦截的请求都会转发到这个服务上面
+zuul.routes.api-d.serviceId=VService
+
+#  第二种 路由规则配置  zuul.routes.服务名称 = 规则路径
+zuul.routes.VService=/bbbbb/**
+
+
+
+# 会话保持问题 ：由于我们一开始访问的是9005  由9005 转发到9002上面 这样会导致会话中的cookie丢失
+
+# 解决方式为： zuul.sensitive-heanders=   来配置忽略请求头的信息设置为空
+zuul.sensitive-heanders=
+
+# 设置保存host头部信息正确处理,
+zuul.add-host-headers=true
