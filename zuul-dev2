@@ -1,7 +1,4 @@
-# 更改默认端口号
-server.port=9994
-# 服务名称
-spring.application.name=zuul
+
 
 # 设置注册中心的URL
 eureka.client.serviceUrl.defaultZone=http://localhost:9991/eureka
